@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 def home(request):
-	return HttpResponse("<h1>Bienvenidos</h1>")
+	return render(request, 'frontend/home.html')
