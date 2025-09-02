@@ -1,0 +1,51 @@
+REPORTE DE PROYECTO DJANGO - APP1.0
+Fecha: 2 de septiembre de 2025
+
+Resumen general:
+----------------
+Este proyecto es una aplicación web Django con autenticación de usuarios, frontend personalizado y panel privado. Se ha trabajado en la experiencia de usuario, seguridad y facilidad de despliegue.
+
+Funcionalidades implementadas:
+------------------------------
+1. Estructura Django lista para ser probada en cualquier máquina (venv, requirements, etc).
+2. App 'frontend' para la interfaz visual y lógica de usuario.
+3. Sistema de registro de usuarios con validaciones personalizadas:
+   - Nombre de usuario: máximo 20 caracteres, debe contener al menos un número, permite caracteres especiales.
+   - Email válido y único.
+   - Contraseña y confirmación en tiempo real.
+   - Validaciones en vivo (JS) para usuario, email y contraseñas.
+   - Botón para mostrar/ocultar contraseña.
+4. Sistema de login:
+   - Formulario Bootstrap, validación de errores, mensajes claros.
+   - Botón para ir a registro desde login.
+   - Mensajes de éxito en verde, errores en rojo.
+5. Navbar dinámico:
+   - Si el usuario no está autenticado: muestra botones de login y registro.
+   - Si el usuario está autenticado: muestra su nombre y un menú desplegable con "Cerrar sesión".
+6. Panel privado:
+   - Tras login exitoso, el usuario es redirigido a /panel/ (landing privado).
+   - El contenido es igual al home, pero solo accesible para usuarios autenticados.
+7. Logout:
+   - Opción en el menú de usuario para cerrar sesión y volver al home.
+8. Estilo y UX:
+   - Bootstrap 5, Bootstrap Icons, estilos personalizados.
+   - Formularios y menús responsivos y modernos.
+
+Archivos clave:
+---------------
+- core/settings.py: configuración general y registro de apps.
+- core/urls.py: rutas principales.
+- frontend/views.py: lógica de login, registro, panel privado y logout.
+- frontend/forms.py: formularios y validaciones personalizadas.
+- frontend/templates/frontend/base.html: layout principal y navbar dinámico.
+- frontend/templates/frontend/login.html: formulario de login.
+- frontend/templates/frontend/register.html: formulario de registro.
+- frontend/templates/frontend/private_home.html: landing privado.
+- frontend/static/css/styles.css: estilos personalizados.
+
+Notas adicionales:
+------------------
+- El sistema está listo para ser extendido con nuevas funcionalidades.
+- El código está versionado en git y puede ser desplegado en cualquier entorno compatible con Django.
+
+Fin del reporte.

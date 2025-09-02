@@ -1,0 +1,134 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+    <div class="card shadow border-0">
+        <div class="card-body p-4">
+            <h2 class="mb-4 text-center"><i class="bi bi-person-plus-fill me-2 text-primary"></i>Registro</h2>
+            <form method="post" novalidate autocomplete="off">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label fw-semibold">{{ field.label }}</label>
+                        <div class="input-group">
+                            {% if field.name == 'username' %}
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input type="text" name="{{ field.name }}" class="form-control" id="{{ field.id_for_label }}" value="{{ field.value|default:'' }}" maxlength="20" required oninput="validateUsername(this)">
+                                <div id="username-feedback" class="form-text text-danger d-none"></div>
+                            {% elif field.name == 'email' %}
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" name="{{ field.name }}" class="form-control" id="{{ field.id_for_label }}" value="{{ field.value|default:'' }}" required oninput="validateEmail(this)">
+                                <div id="email-feedback" class="form-text text-danger d-none"></div>
+                            {% elif field.name == 'password' %}
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" name="{{ field.name }}" class="form-control" id="{{ field.id_for_label }}" required oninput="validatePasswordMatch()">
+                                <button type="button" class="btn btn-outline-secondary" tabindex="-1" onclick="togglePassword('id_password', this)" onmousedown="showPassword('id_password', this)" onmouseup="hidePassword('id_password', this)" onmouseleave="hidePassword('id_password', this)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            {% elif field.name == 'password2' %}
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                <input type="password" name="{{ field.name }}" class="form-control" id="{{ field.id_for_label }}" required oninput="validatePasswordMatch()">
+                                <button type="button" class="btn btn-outline-secondary" tabindex="-1" onclick="togglePassword('id_password2', this)" onmousedown="showPassword('id_password2', this)" onmouseup="hidePassword('id_password2', this)" onmouseleave="hidePassword('id_password2', this)">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <div id="password2-feedback" class="form-text text-danger d-none"></div>
+                            {% else %}
+                                {{ field }}
+                            {% endif %}
+                        </div>
+                        {% if field.help_text %}
+                            <div class="form-text">{{ field.help_text }}</div>
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="text-danger small mt-1">{{ field.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary w-100 py-2 mt-2">Registrarse</button>
+            </form>
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger mt-3">{{ form.non_field_errors }}</div>
+            {% endif %}
+        </div>
+    </div>
+<script>
+// Mostrar/ocultar contraseña al mantener presionado el botón
+function showPassword(id, btn) {
+    const input = document.getElementById(id);
+    if (input) input.type = 'text';
+    if (btn) btn.classList.add('active');
+}
+function hidePassword(id, btn) {
+    const input = document.getElementById(id);
+    if (input) input.type = 'password';
+    if (btn) btn.classList.remove('active');
+}
+// Alternar visibilidad con click (opcional)
+function togglePassword(id, btn) {
+    const input = document.getElementById(id);
+    if (input) {
+        if (input.type === 'password') {
+            input.type = 'text';
+            btn.classList.add('active');
+        } else {
+            input.type = 'password';
+            btn.classList.remove('active');
+        }
+    }
+}
+
+function validateUsername(input) {
+    const value = input.value;
+    const feedback = document.getElementById('username-feedback');
+    let error = '';
+    if (value.length > 20) {
+        error = 'Debe tener máximo 20 caracteres.';
+    } else if (!/\d/.test(value)) {
+        error = 'Debe contener al menos un número.';
+    }
+    if (error) {
+        feedback.textContent = error + ' Puede incluir cualquier caracter especial.';
+        feedback.classList.remove('d-none');
+        input.classList.add('is-invalid');
+    } else {
+        feedback.textContent = '';
+        feedback.classList.add('d-none');
+        input.classList.remove('is-invalid');
+    }
+}
+
+function validateEmail(input) {
+    const value = input.value;
+    const feedback = document.getElementById('email-feedback');
+    // Expresión regular básica para email válido
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (value && !emailRegex.test(value)) {
+        feedback.textContent = 'Introduce un correo electrónico válido.';
+        feedback.classList.remove('d-none');
+        input.classList.add('is-invalid');
+    } else {
+        feedback.textContent = '';
+        feedback.classList.add('d-none');
+        input.classList.remove('is-invalid');
+    }
+}
+
+function validatePasswordMatch() {
+    const pass1 = document.getElementById('id_password');
+    const pass2 = document.getElementById('id_password2');
+    const feedback = document.getElementById('password2-feedback');
+    if (pass1 && pass2) {
+        if (pass2.value && pass1.value !== pass2.value) {
+            feedback.textContent = 'Las contraseñas no coinciden.';
+            feedback.classList.remove('d-none');
+            pass2.classList.add('is-invalid');
+        } else {
+            feedback.textContent = '';
+            feedback.classList.add('d-none');
+            pass2.classList.remove('is-invalid');
+        }
+    }
+}
+</script>
+{% endblock %}

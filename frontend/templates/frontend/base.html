@@ -6,17 +6,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Módulo 1{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Inicio</a>
-            {% block nav %}{% endblock %}
+    <!-- Logo y Navbar -->
+
+    <header class="bg-white border-bottom mb-3">
+        <div class="container-fluid py-2">
+            <div class="row align-items-center">
+                <div class="col-3"></div>
+                <div class="col-6 d-flex align-items-center justify-content-center">
+                    <a href="/" class="d-flex align-items-center text-decoration-none">
+                        <i class="bi bi-grid-3x3-gap-fill fs-2 me-2 text-primary"></i>
+                        <span class="fs-4 fw-bold text-center text-dark">Sitio Main del servicio</span>
+                    </a>
+                </div>
+                <div class="col-3"></div>
+            </div>
         </div>
-    </nav>
-    <div class="container mt-4">
-        {% block content %}{% endblock %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Inicio</a>
+                <!-- Botón hamburguesa para offcanvas -->
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Menú lateral">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Menú normal en desktop -->
+                <div class="ms-auto d-none d-lg-flex align-items-center">
+                    {% block nav %}{% endblock %}
+                    <div class="d-flex align-items-center gap-2 ms-2 flex-wrap" style="min-width: 0;">
+                        {% if user.is_authenticated %}
+                            <a href="/portal-formularios/" class="btn btn-outline-primary d-flex align-items-center flex-shrink-1 flex-grow-1 px-3 py-2" style="min-width: 150px; max-width: 100%;">
+                                <i class="bi bi-ui-checks-grid me-2"></i>
+                                <span class="text-truncate">Portal de formularios</span>
+                            </a>
+                            <div class="dropdown position-relative flex-shrink-1 flex-grow-1" style="min-width: 120px; max-width: 100%;">
+                                <a href="#" class="btn btn-success d-flex align-items-center dropdown-toggle w-100 px-3 py-2" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 120px;">
+                                    <i class="bi bi-person-circle me-2"></i>
+                                    <span class="text-truncate">{{ user.username }}</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end w-100" aria-labelledby="userDropdown" style="min-width: 100%;">
+                                    <li>
+                                        <a href="/logout/" class="dropdown-item d-flex align-items-center text-primary w-100" style="min-width: 100%;">
+                                            <i class="bi bi-box-arrow-right me-2"></i>
+                                            <span>Cerrar sesión</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <div class="dropdown position-relative flex-shrink-1 flex-grow-1" style="min-width: 120px; max-width: 100%;">
+                                <a href="/login/" class="btn btn-primary d-flex align-items-center w-100 px-3 py-2" id="loginDropdown" style="min-width: 120px;">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                                    <span class="text-truncate">Iniciar sesión</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
+                                    <li>
+                                        <a href="/register/" class="dropdown-item d-flex align-items-center">
+                                            <i class="bi bi-person-plus me-2"></i>
+                                            <span>Registrarse</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- Offcanvas para mobile -->
+                <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><i class="bi bi-list"></i> Menú</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        {% if user.is_authenticated %}
+                            <a href="/portal-formularios/" class="btn btn-outline-primary w-100 mb-2 d-flex align-items-center">
+                                <i class="bi bi-ui-checks-grid me-2"></i>
+                                <span>Portal de formularios</span>
+                            </a>
+                            <div class="dropdown w-100 mb-2">
+                                <a href="#" class="btn btn-success d-flex align-items-center dropdown-toggle w-100" id="userDropdownMobile" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-2"></i>
+                                    <span>{{ user.username }}</span>
+                                </a>
+                                <ul class="dropdown-menu w-100" aria-labelledby="userDropdownMobile">
+                                    <li>
+                                        <a href="/logout/" class="dropdown-item d-flex align-items-center text-primary w-100">
+                                            <i class="bi bi-box-arrow-right me-2"></i>
+                                            <span>Cerrar sesión</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <a href="/login/" class="btn btn-primary w-100 mb-2 d-flex align-items-center" id="loginDropdownMobile">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                                <span>Iniciar sesión</span>
+                            </a>
+                            <a href="/register/" class="btn btn-light w-100 d-flex align-items-center border">
+                                <i class="bi bi-person-plus me-2"></i>
+                                <span>Registrarse</span>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Layout con sidebars -->
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-md-2 d-none d-md-block bg-light border-end min-vh-100" style="min-height: 60vh;">
+                <!-- Sidebar izquierda vacía -->
+            </aside>
+                        <main class="col-md-8 py-4">
+                                {# Mensajes globales eliminados para evitar duplicidad en formularios #}
+                                {% block content %}{% endblock %}
+            </main>
+            <aside class="col-md-2 d-none d-md-block bg-light border-start min-vh-100" style="min-height: 60vh;">
+                <!-- Sidebar derecha vacía -->
+            </aside>
+        </div>
     </div>
 </body>
+<!-- Bootstrap JS Bundle (incluye Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </html>
