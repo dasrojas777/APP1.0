@@ -79,28 +79,38 @@ header .container-fluid {
 	text-align: center;
 }
 
-header .container-fluid img {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-}
-
-header .container-fluid span {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+@media (max-width: 767.98px) {
+	header .container-fluid {
+		padding-left: 0.5rem !important;
+		padding-right: 0.5rem !important;
+	}
+	.navbar .container-fluid {
+		padding-left: 0.5rem !important;
+		padding-right: 0.5rem !important;
+	}
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	main.col-12, main.col-md-8 {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
 }
 
 .navbar {
 	justify-content: center;
 }
 
-main.col-md-8 {
+main.col-md-8, main.col-12 {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
 	min-height: 60vh;
+	width: 100%;
+	padding-top: 0 !important;
+	margin-top: 0 !important;
 }
 
 aside {
@@ -108,4 +118,26 @@ aside {
 	align-items: center;
 	justify-content: center;
 	min-height: 60vh;
+}
+
+/* Mejorar tarjetas en portal de formularios */
+.card.h-100 {
+	min-height: 140px;
+	border-radius: 0.75rem;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+@media (max-width: 575.98px) {
+	.card.h-100 {
+		min-height: 100px;
+		font-size: 0.95rem;
+	}
+	.container, .container-fluid {
+		padding-left: 0.5rem !important;
+		padding-right: 0.5rem !important;
+	}
+}
+
+form.card {
+	border-radius: 0.75rem;
 }

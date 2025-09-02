@@ -1,0 +1,14 @@
+# Objetivo
+Desarrollar una herramienta web que permita subir un formulario (ej: PDF), analizarlo automáticamente y generar un formulario digital editable y reutilizable en el sistema. El formulario digital debe poder ser sugerido a otros usuarios y permitir la carga de adjuntos.
+
+# Pasos a seguir
+1. Permitir la carga de archivos de formulario (PDF, Word, etc.) desde la web.
+2. Procesar el archivo subido para extraer automáticamente los campos del formulario (nombre, tipo, requeridos, adjuntos).
+3. Generar un formulario digital editable en la web, similar al original.
+4. Guardar la estructura del formulario en la base de datos para sugerencias y reutilización.
+5. Permitir que los usuarios completen el formulario digital y suban adjuntos asociados.
+6. (Opcional) Permitir revisión manual de la estructura extraída para asegurar calidad.
+
+# Notas
+- La extracción automática puede requerir ajustes manuales según la complejidad del formulario.
+- El sistema debe ser robusto y fácil de usar, pensado para entornos de obra.
