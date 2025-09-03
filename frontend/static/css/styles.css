@@ -102,7 +102,9 @@ header .container-fluid {
 	justify-content: center;
 }
 
-main.col-md-8, main.col-12 {
+
+
+main.col-md-8, main.col-12, main.col-sm-10, main.col-lg-9, main.col-xl-8, main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -111,6 +113,11 @@ main.col-md-8, main.col-12 {
 	width: 100%;
 	padding-top: 0 !important;
 	margin-top: 0 !important;
+}
+
+.container-fluid.px-1.px-md-2 {
+	padding-left: clamp(1%, 10vw, 10%) !important;
+	padding-right: clamp(1%, 10vw, 10%) !important;
 }
 
 aside {
