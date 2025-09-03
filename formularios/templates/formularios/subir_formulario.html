@@ -6,6 +6,9 @@
   <form method="post" enctype="multipart/form-data" class="card p-4 shadow-sm mx-auto" style="max-width: 500px;">
     {% csrf_token %}
     {{ form.as_p }}
+    {% if error_nombre %}
+      <div class="alert alert-danger mt-2">{{ error_nombre }}</div>
+    {% endif %}
     <div class="d-flex flex-column flex-sm-row justify-content-between gap-2 mt-2">
       <button type="submit" class="btn btn-success w-100 w-sm-auto">
         <i class="bi bi-upload me-1"></i> Subir
