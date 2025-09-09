@@ -2,6 +2,15 @@
 {% block title %}Editor de Formularios{% endblock %}
 {% block content %}
 <div class="pt-2 pb-3 w-100">
+	<!-- Botón para volver al portal anterior -->
+	{% block back_button %}
+	<div class="w-100 d-none d-md-flex justify-content-start mb-3">
+		<a href="/" class="btn btn-primary d-flex align-items-center gap-2 px-4" style="border-radius: 2rem; min-width: 44px; min-height: 44px;">
+			<i class="bi bi-arrow-left fs-5"></i>
+			<span>Atrás</span>
+		</a>
+	</div>
+	{% endblock %}
 	<div class="seccion-formularios-creados mb-4 w-100">
 		<h2 class="mb-3">Tus formularios creados</h2>
 	<div class="card w-100 shadow-sm bg-light border border-1 border-secondary-subtle">

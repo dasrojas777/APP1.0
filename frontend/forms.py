@@ -5,6 +5,12 @@ from django.core.exceptions import ValidationError
 import re
 
 class RegisterForm(forms.ModelForm):
+    """
+    Formulario de registro de usuario con validaciones personalizadas:
+    - username: máximo 20 caracteres, debe contener al menos un número.
+    - email: debe ser único en la base de datos.
+    - password y password2: deben coincidir.
+    """
     password = forms.CharField(widget=forms.PasswordInput, label="Contraseña")
     password2 = forms.CharField(widget=forms.PasswordInput, label="Confirmar contraseña")
 
@@ -23,23 +29,24 @@ class RegisterForm(forms.ModelForm):
         }
 
     def clean_username(self):
+        """Valida que el nombre de usuario cumpla las reglas de longitud y contenga al menos un número."""
         username = self.cleaned_data.get("username", "")
-        # Mensaje personalizado con todas las reglas
         reglas = "Debe tener máximo 20 caracteres, contener al menos un número y puede incluir cualquier caracter especial."
         if len(username) > 20:
             raise ValidationError(f"{reglas}")
         if not re.search(r"\d", username):
             raise ValidationError(f"{reglas}")
-        # Permitimos cualquier caracter especial universal, solo validamos longitud y número
         return username
 
     def clean_email(self):
+        """Valida que el email no esté registrado previamente."""
         email = self.cleaned_data.get("email")
         if User.objects.filter(email=email).exists():
             raise ValidationError("Este correo electrónico ya está registrado.")
         return email
 
     def clean(self):
+        """Valida que las contraseñas coincidan."""
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         password2 = cleaned_data.get("password2")

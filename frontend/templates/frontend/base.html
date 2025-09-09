@@ -13,102 +13,126 @@
 <body>
     <!-- Logo y Navbar -->
 
-    <header class="bg-white border-bottom mb-3">
-        <div class="container-fluid py-2 px-3 px-md-5">
-            <div class="row align-items-center">
-                <div class="col-12 d-flex align-items-center justify-content-center justify-content-md-start">
-                    <a href="/" class="d-flex align-items-center text-decoration-none mx-auto mx-md-0">
+    <header class="bg-white shadow-sm mb-3 border-0">
+        <nav class="navbar navbar-expand-lg navbar-white bg-white py-2 px-1 px-md-2 shadow-sm border-0">
+            <!-- Contenedor flex para móvil -->
+            <!-- Navbar móvil/tablet: visible hasta 991.98px -->
+            <div class="d-flex d-lg-none w-100 align-items-center justify-content-between position-relative mobile-navbar-row">
+                <div class="col-2 d-flex justify-content-start align-items-center p-0">
+                    {% if request.path == '/' %}
+                        <div class="btn-thumb-back inactive d-flex align-items-center justify-content-center" role="button" tabindex="0" aria-label="Volver al inicio">
+                            <i class="bi bi-arrow-left"></i>
+                        </div>
+                    {% else %}
+                        <div class="btn-thumb-back d-flex align-items-center justify-content-center" onclick="window.location='/'" role="button" tabindex="0" aria-label="Volver al inicio">
+                            <i class="bi bi-arrow-left"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-8 d-flex justify-content-center align-items-center p-0">
+                    <a href="/" class="d-flex align-items-center text-decoration-none logo-navbar-mobile" style="max-width: 70vw;">
                         <i class="bi bi-grid-3x3-gap-fill fs-2 me-2 text-primary"></i>
-                        <span class="fs-4 fw-bold text-center text-dark">Sitio Main del servicio</span>
+                        <span class="fs-5 fw-bold text-dark d-none d-sm-inline">Sitio Main del servicio</span>
                     </a>
                 </div>
+                <div class="col-2 d-flex justify-content-end align-items-center p-0">
+                    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Menú lateral">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
             </div>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">Inicio</a>
-                <!-- Botón hamburguesa solo en móvil (menor a md) -->
-                <button class="navbar-toggler d-block d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Menú lateral">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- Menú normal en desktop (md en adelante) -->
-                <div class="ms-auto d-none d-md-flex align-items-center">
-                    {% block nav %}{% endblock %}
-                    <div class="d-flex align-items-center gap-2 ms-2 flex-wrap" style="min-width: 0; max-width: 350px;">
-                        {% if user.is_authenticated %}
-                            <a href="/portal-formularios/" class="btn btn-outline-primary d-flex align-items-center flex-grow-1 px-3 py-2 w-100" style="min-width: 120px; max-width: 180px;">
-                                <i class="bi bi-pencil-square me-2"></i>
-                                <span class="text-truncate">Editor de formularios</span>
-                            </a>
-                            <div class="dropdown position-relative flex-grow-1" style="min-width: 120px; max-width: 180px;">
-                                <a href="#" class="btn btn-success d-flex align-items-center dropdown-toggle w-100 px-3 py-2" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 120px; max-width: 180px;">
-                                    <i class="bi bi-person-circle me-2"></i>
-                                    <span class="text-truncate">{{ user.username }}</span>
+            <!-- Navbar escritorio: visible solo en PC (≥992px) -->
+            <div class="container-fluid d-none d-lg-block px-1 px-md-2 position-relative">
+                <div class="row align-items-center">
+                    <!-- Columna 1: Logo/thumb + texto -->
+                    <div class="col-auto">
+                        <a href="/" class="d-flex align-items-center text-decoration-none">
+                            <i class="bi bi-grid-3x3-gap-fill fs-2 me-2 text-primary"></i>
+                            <span class="fs-4 fw-bold text-dark d-none d-sm-inline">Sitio Main del servicio</span>
+                        </a>
+                    </div>
+                    <!-- Columna 2: Vacía -->
+                    <div class="col"></div>
+                    <!-- Columna 3: Acciones/usuario/login -->
+                    <div class="col-auto">
+                        <div class="d-flex align-items-center gap-3">
+                            {% block nav %}{% endblock %}
+                            {% if user.is_authenticated %}
+                                <a href="/portal-formularios/" class="btn btn-outline-primary d-flex align-items-center px-3 py-2">
+                                    <i class="bi bi-pencil-square me-2"></i>
+                                    <span>Editor de formularios</span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end w-100" aria-labelledby="userDropdown" style="min-width: 100%;">
-                                    <li>
-                                        <a href="/logout/" class="dropdown-item d-flex align-items-center text-primary w-100" style="min-width: 100%;">
-                                            <i class="bi bi-box-arrow-right me-2"></i>
-                                            <span>Cerrar sesión</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        {% else %}
-                            <div class="dropdown position-relative flex-grow-1" style="min-width: 120px; max-width: 180px;">
-                                <a href="/login/" class="btn btn-primary d-flex align-items-center w-100 px-3 py-2" id="loginDropdown" style="min-width: 120px; max-width: 180px;">
+                                <div class="dropdown ms-2">
+                                    <a href="#" class="btn btn-light border d-flex align-items-center dropdown-toggle px-3 py-2" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-person-circle me-2"></i>
+                                        <span>{{ user.username }}</span>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                        <li>
+                                            <a href="/logout/" class="dropdown-item d-flex align-items-center text-primary">
+                                                <i class="bi bi-box-arrow-right me-2"></i>
+                                                <span>Cerrar sesión</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% else %}
+                            <div class="login-dropdown ms-2 position-relative" style="width:220px;">
+                                <button type="button" class="btn login-dropdown-btn w-100 d-flex align-items-center justify-content-center" id="loginDropdown" aria-expanded="false">
                                     <i class="bi bi-box-arrow-in-right me-2"></i>
-                                    <span class="text-truncate">Iniciar sesión</span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end w-100" aria-labelledby="loginDropdown" style="min-width: 100%;">
-                                    <li>
-                                        <a href="/register/" class="dropdown-item d-flex align-items-center">
+                                    <span>Iniciar sesión</span>
+                                </button>
+                                <div class="dropdown-menu-custom position-absolute w-100" style="top:calc(100% + 8px); left:0; display:none; z-index:1050;">
+                                    <form action="/register/" method="get" class="w-100">
+                                        <button type="submit" class="btn register-dropdown-btn w-100 d-flex align-items-center justify-content-center" tabindex="0">
                                             <i class="bi bi-person-plus me-2"></i>
                                             <span>Registrarse</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                        {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-                <!-- Offcanvas solo en móvil (sm y menores) -->
-                <div class="offcanvas offcanvas-start d-block d-md-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><i class="bi bi-list"></i> Menú</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        {% if user.is_authenticated %}
-                            <a href="/portal-formularios/" class="btn btn-outline-primary w-100 mb-2 d-flex align-items-center justify-content-center text-center">
-                                <i class="bi bi-pencil-square me-2"></i>
-                                <span>Editor de formularios</span>
+            </div>
+            <!-- Offcanvas solo en móvil (sm y menores) -->
+            <div class="offcanvas offcanvas-end d-block d-md-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><i class="bi bi-list"></i> Menú</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <a class="nav-link px-3 py-2 text-primary fw-semibold" href="/">Inicio</a>
+                    {% if user.is_authenticated %}
+                        <a href="/portal-formularios/" class="btn btn-outline-primary w-100 mb-2 d-flex align-items-center justify-content-center text-center">
+                            <i class="bi bi-pencil-square me-2"></i>
+                            <span>Editor de formularios</span>
+                        </a>
+                        <div class="dropdown w-100 mb-2">
+                            <a href="#" class="btn btn-light border d-flex align-items-center dropdown-toggle w-100" id="userDropdownMobile" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle me-2"></i>
+                                <span>{{ user.username }}</span>
                             </a>
-                            <div class="dropdown w-100 mb-2">
-                                <a href="#" class="btn btn-success d-flex align-items-center dropdown-toggle w-100" id="userDropdownMobile" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="bi bi-person-circle me-2"></i>
-                                    <span>{{ user.username }}</span>
-                                </a>
-                                <ul class="dropdown-menu w-100" aria-labelledby="userDropdownMobile">
-                                    <li>
-                                        <a href="/logout/" class="dropdown-item d-flex align-items-center text-primary w-100">
-                                            <i class="bi bi-box-arrow-right me-2"></i>
-                                            <span>Cerrar sesión</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        {% else %}
-                            <a href="/login/" class="btn btn-primary w-100 mb-2 d-flex align-items-center justify-content-center text-center" id="loginDropdownMobile">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>
-                                <span>Iniciar sesión</span>
-                            </a>
-                            <a href="/register/" class="btn btn-light w-100 d-flex align-items-center border justify-content-center text-center">
-                                <i class="bi bi-person-plus me-2"></i>
-                                <span>Registrarse</span>
-                            </a>
-                        {% endif %}
-                    </div>
+                            <ul class="dropdown-menu w-100" aria-labelledby="userDropdownMobile">
+                                <li>
+                                    <a href="/logout/" class="dropdown-item d-flex align-items-center text-primary w-100">
+                                        <i class="bi bi-box-arrow-right me-2"></i>
+                                        <span>Cerrar sesión</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <a href="/login/" class="btn btn-primary w-100 mb-2 d-flex align-items-center justify-content-center text-center" id="loginDropdownMobile">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            <span>Iniciar sesión</span>
+                        </a>
+                        <a href="/register/" class="btn btn-outline-secondary w-100 d-flex align-items-center border justify-content-center text-center">
+                            <i class="bi bi-person-plus me-2"></i>
+                            <span>Registrarse</span>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </nav>

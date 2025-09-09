@@ -1,53 +1,42 @@
-.dropdown-menu {
-	background-color: #fff;
-	border: none;
-	box-shadow: none;
-	padding: 0;
-	margin-top: 6px;
-	border-radius: 0 0 0.375rem 0.375rem;
+/* Dropdown personalizado para login/registro */
+.dropdown-menu-custom {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    animation: fadeInDropdown 0.25s;
 }
+.login-dropdown:hover .dropdown-menu-custom,
+.login-dropdown:focus-within .dropdown-menu-custom,
+#loginDropdown:focus + .dropdown-menu-custom {
+    display: flex !important;
+}
+@keyframes fadeInDropdown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* Centrar verticalmente los elementos de la navbar de escritorio */
+.navbar .container-fluid.d-none.d-lg-block .row.align-items-center {
+    align-items: center !important;
+    display: flex !important;
+    height: 64px;
+    min-height: 64px;
+}
+    .navbar .container-fluid.d-none.d-lg-block .row.align-items-center > .col,
+    .navbar .container-fluid.d-none.d-lg-block .row.align-items-center > .col-auto {
+        display: flex !important;
+        align-items: center !important;
+        height: 100%;
+    }
 
-.dropdown-menu .dropdown-item {
-	background-color: #fff;
-	color: #0d6efd;
-	border-radius: 0 0 0.375rem 0.375rem;
-	border: none;
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
-	transition: background 0.2s;
-	box-shadow: none;
-}
-.dropdown-menu .dropdown-item:hover, .dropdown-menu .dropdown-item:focus {
-	background-color: #e7f1ff;
-	color: #0b5ed7;
-}
-
-.dropdown .btn {
-	border-radius: 0.375rem 0.375rem 0 0;
-}
-.dropdown-menu .dropdown-item {
-	margin-top: 4px;
-}
-/* Dropdown al pasar el mouse */
-.dropdown .dropdown-menu {
-	display: block !important;
-	opacity: 0;
-	pointer-events: none;
-	transform: translateY(-10px);
-	transition: opacity 0.5s, transform 0.5s;
-	position: absolute;
-	top: 100%;
-	right: 0;
-	left: auto;
-	z-index: 1000;
-}
-.dropdown:hover .dropdown-menu, .dropdown:focus-within .dropdown-menu {
-	opacity: 1;
-	pointer-events: auto;
-	transform: translateY(0);
-	margin-top: 0;
+    /* Hacer que el contenedor de botones ocupe toda la columna */
+    .navbar .container-fluid.d-none.d-lg-block .row.align-items-center > .col-auto > .d-flex.align-items-center.gap-3 {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
 }
 
 /* Igualar tamaño y alineación de los botones */
@@ -113,6 +102,7 @@ main.col-md-8, main.col-12, main.col-sm-10, main.col-lg-9, main.col-xl-8, main {
 	width: 100%;
 	padding-top: 0 !important;
 	margin-top: 0 !important;
+	background: #fff;
 }
 
 .container-fluid.px-1.px-md-2 {
@@ -121,17 +111,18 @@ main.col-md-8, main.col-12, main.col-sm-10, main.col-lg-9, main.col-xl-8, main {
 }
 
 aside {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    box-shadow: none !important;
 }
 
 /* Mejorar tarjetas en portal de formularios */
 .card.h-100 {
 	min-height: 140px;
 	border-radius: 0.75rem;
-	box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: none !important;
 }
 
 @media (max-width: 575.98px) {
@@ -143,8 +134,601 @@ aside {
 		padding-left: 0.5rem !important;
 		padding-right: 0.5rem !important;
 	}
+	.mobile-navbar-row {
+		min-height: 48px;
+		padding-left: 0.25rem !important;
+		padding-right: 0.25rem !important;
+		display: flex !important;
+		flex-direction: row !important;
+	}
+	.mobile-navbar-row .col-2 {
+		display: flex !important;
+		align-items: center !important;
+		justify-content: flex-start !important;
+		padding: 0 !important;
+	}
+	.back-btn-mobile {
+		width: 32px !important;
+		height: 32px !important;
+		min-width: 32px !important;
+		min-height: 32px !important;
+		aspect-ratio: 1/1 !important;
+		border-radius: 50% !important;
+		padding: 0 !important;
+		display: flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+		line-height: 1 !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+	}
+	.back-btn-mobile i {
+		font-size: 1.1rem !important;
+		margin: 0 !important;
+		line-height: 1 !important;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
-
 form.card {
 	border-radius: 0.75rem;
+}
+
+/* Botón atrás escritorio alineado a la izquierda */
+.back-btn-desktop {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: none !important;
+    z-index: 1051;
+}
+/* Botón atrás móvil en navbar, pequeño y a la izquierda */
+.back-btn-mobile {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+/* Centrar logo en móvil, alineado izq en escritorio */
+@media (max-width: 767.98px) {
+    .logo-navbar {
+        position: absolute !important;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1050;
+    }
+}
+@media (min-width: 768px) {
+    .logo-navbar {
+        position: static !important;
+        transform: none !important;
+    }
+}
+
+/* =====================
+   ESTILOS PARA MÓVIL
+   ===================== */
+@media (max-width: 575.98px), (max-aspect-ratio: 10/16) {
+    /* Aquí van todos los estilos móviles */
+    .mobile-navbar-row {
+        min-height: 48px;
+        padding-left: 0.25rem !important;
+        padding-right: 0.25rem !important;
+        display: flex !important;
+        flex-direction: row !important;
+    }
+    .mobile-navbar-row .col-2 {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 0 !important;
+    }
+    .back-btn-mobile {
+        width: 32px !important;
+        height: 32px !important;
+        min-width: 32px !important;
+        min-height: 32px !important;
+        aspect-ratio: 1/1 !important;
+        border-radius: 50% !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        line-height: 1 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+    .back-btn-mobile i {
+        font-size: 1.1rem !important;
+        margin: 0 !important;
+        line-height: 1 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .logo-navbar-mobile {
+        max-width: 70vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        justify-content: center !important;
+    }
+    .navbar-toggler {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .col-2, .col-8 {
+        flex: 0 0 auto;
+        padding: 0 !important;
+    }
+    .col-2 {
+        width: 16.66666667%;
+        max-width: 16.66666667%;
+    }
+    .col-8 {
+        width: 66.66666667%;
+        max-width: 66.66666667%;
+    }
+    /* Otros estilos móviles aquí... */
+}
+
+/* Thumb para botón atrás móvil - versión estética mejorada */
+.btn-thumb-back {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb 60%, #60a5fa 100%);
+    color: #fff;
+    box-shadow: none !important;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    font-size: 1.35rem;
+    border: 2px solid #fff;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-thumb-back:hover, .btn-thumb-back:focus {
+    background: linear-gradient(135deg, #1d4ed8 60%, #3b82f6 100%);
+    box-shadow: none !important;
+    transform: scale(1.08);
+}
+.btn-thumb-back:active {
+    background: linear-gradient(135deg, #1e40af 60%, #2563eb 100%);
+    box-shadow: none !important;
+    transform: scale(0.97);
+}
+.btn-thumb-back i {
+    font-size: 1.3rem;
+    margin: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estado inactivo para el botón atrás (gris) */
+.btn-thumb-back.inactive {
+    background: linear-gradient(135deg, #e5e7eb 60%, #cbd5e1 100%) !important;
+    color: #9ca3af !important;
+    border: 2px solid #f3f4f6 !important;
+    box-shadow: none !important;
+    cursor: default !important;
+    pointer-events: none !important;
+    opacity: 0.7;
+}
+.btn-thumb-back.inactive:hover, .btn-thumb-back.inactive:focus, .btn-thumb-back.inactive:active {
+    background: linear-gradient(135deg, #e5e7eb 60%, #cbd5e1 100%) !important;
+    color: #9ca3af !important;
+    box-shadow: 0 2px 8px 0 rgba(156,163,175,0.10);
+    transform: none;
+}
+
+/* Ocultar el botón de menú (navbar-toggler) cuando el offcanvas está abierto */
+@media (max-width: 575.98px) {
+    .offcanvas.show ~ .navbar-toggler,
+    .offcanvas.show + .navbar-toggler {
+        display: none !important;
+    }
+    /* Alternativa robusta para la estructura flex de la navbar móvil */
+    .mobile-navbar-row .navbar-toggler.offcanvas-open {
+        display: none !important;
+    }
+    /* Oculta todos los elementos de la navbar móvil cuando el offcanvas está abierto */
+    body:has(.offcanvas-backdrop.show) .mobile-navbar-row {
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+}
+@media (max-width: 991.98px) {
+    /* Oculta el botón de menú cuando el offcanvas está abierto, en cualquier orientación */
+    body:has(.offcanvas.show) .navbar-toggler,
+    body:has(.offcanvas-backdrop.show) .navbar-toggler {
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+}
+
+/* =====================
+   ESTILOS PARA SMARTPHONE
+   ===================== */
+@media (max-width: 575.98px) {
+    /* Ejemplo: navbar móvil, botones grandes, cards apiladas */
+    .navbar, .mobile-navbar-row { font-size: 1rem; }
+    .card { margin-bottom: 1rem; }
+    .d-pc-only { display: none !important; }
+    .d-tablet-only, .d-mobile-only { display: block !important; }
+}
+
+/* =====================
+   ESTILOS PARA TABLET
+   ===================== */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    /* Ejemplo: navbar compacta, cards en 2 columnas */
+    .navbar, .mobile-navbar-row { font-size: 1.08rem; }
+    .card-columns { column-count: 2; }
+    .d-pc-only { display: none !important; }
+    .d-tablet-only { display: block !important; }
+    .d-mobile-only { display: none !important; }
+    .offcanvas.offcanvas-end {
+        width: 340px !important;
+        max-width: 90vw !important;
+        min-width: 220px !important;
+        border-radius: 1.2rem 0 0 1.2rem;
+        box-shadow: none !important;
+        z-index: 1200 !important;
+    }
+    .offcanvas-backdrop.show {
+        z-index: 1199 !important;
+    }
+    .offcanvas.offcanvas-end.show {
+        display: block !important;
+        visibility: visible !important;
+        right: 0 !important;
+        left: auto !important;
+        transform: none !important;
+    }
+}
+
+/* =====================
+   ESTILOS PARA PC (diferenciado)
+   ===================== */
+@media (min-width: 992px) {
+    /* Fondo y layout más amplio */
+    body {
+        background: linear-gradient(120deg, #f8fafc 60%, #e0e7ef 100%);
+    }
+    .container-fluid, .main-content-pc {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 1.2rem;
+        box-shadow: none !important;
+        padding: 2.5rem 2.5rem 2rem 2.5rem;
+    }
+    .seccion-formularios-creados h2 {
+        font-size: 2.1rem;
+        color: #2563eb;
+        margin-bottom: 2rem;
+    }
+    .card {
+        border-radius: 1.1rem;
+        box-shadow: none !important;
+        background: #f8fafc;
+        border: 1.5px solid #e0e7ef;
+    }
+    .card-title {
+        font-size: 1.18rem;
+        color: #1e293b;
+    }
+    .card-footer {
+        background: transparent;
+        border: none;
+    }
+    .btn {
+        font-size: 1.08rem;
+        border-radius: 2rem;
+        padding: 0.5rem 1.5rem;
+    }
+    .seccion-crear-nuevo {
+        background: #f1f5f9;
+        border-radius: 0.8rem;
+        padding: 1.5rem 1rem;
+        box-shadow: none !important;
+    }
+    .mb-4 { margin-bottom: 2.5rem !important; }
+    .mb-3 { margin-bottom: 1.5rem !important; }
+    /* Navbar alineada con el content principal */
+    header .container-fluid.d-none.d-md-flex {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+        border-radius: 1.2rem 1.2rem 0 0;
+        box-shadow: none !important;
+        background: #fff;
+    }
+    .navbar {
+        border-radius: 1.2rem 1.2rem 0 0;
+        background: transparent;
+        box-shadow: none;
+    }
+    /* Ocultar el botón de menú y el menú lateral en PC */
+    .navbar-toggler,
+    .offcanvas.offcanvas-end {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    header {
+        margin-bottom: 0 !important;
+        border-bottom: none !important;
+    }
+    .main-content-pc, .container-fluid.px-1.px-md-2 {
+        margin-top: -1.2rem !important;
+        box-shadow: none !important;
+        border-radius: 0 0 1.2rem 1.2rem;
+        padding-top: 2.5rem !important;
+    }
+
+    /* Efecto de transición para el menú de iniciar sesión */
+    .login-dropdown-btn,
+    .register-dropdown-btn {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: 48px !important;
+        border-radius: 2rem !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        padding-left: 1.1rem !important;
+        padding-right: 1.1rem !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        box-sizing: border-box !important;
+        transition: background 0.2s, color 0.2s;
+        box-shadow: none !important;
+        border: none !important;
+        background: none !important;
+    }
+}
+@media (min-width: 992px) {
+    .login-dropdown {
+        width: 220px;
+        min-width: 220px;
+        max-width: 220px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .login-dropdown-btn {
+        background: #1563d7 !important;
+        color: #fff !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .login-dropdown-btn:active, .login-dropdown-btn:focus {
+        background: #0d47a1 !important;
+        color: #fff !important;
+    }
+    .register-dropdown-btn {
+        background: #f3f4f6 !important;
+        color: #111 !important;
+        border: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+    }
+    .register-dropdown-btn:active, .register-dropdown-btn:focus {
+        background: #e5e7eb !important;
+        color: #111 !important;
+    }
+
+    /* Animación de aparición/desaparición lenta para el dropdown */
+    .dropdown-menu-custom {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1s cubic-bezier(.4,0,.2,1);
+    }
+    .login-dropdown:hover .dropdown-menu-custom,
+    #loginDropdown:focus + .dropdown-menu-custom {
+        display: flex !important;
+        opacity: 1;
+        pointer-events: auto;
+        transition-delay: 0s;
+    }
+    .login-dropdown:not(:hover) .dropdown-menu-custom {
+        opacity: 0;
+        pointer-events: none;
+        transition-delay: 1s;
+    }
+
+.dropdown-menu-custom {
+    min-width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    border-radius: 0 0 2rem 2rem !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+}
+}
+@media (min-width: 992px) {
+    header .container-fluid.d-none.d-lg-flex {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+    }
+    .navbar .d-flex.align-items-center.gap-3.ms-auto > * {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
+    .navbar .d-flex.align-items-center.gap-3.ms-auto {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+}
+@media (min-width: 992px) {
+    header .container-fluid.d-none.d-lg-flex {
+        min-height: 42px;
+        height: 42px;
+    }
+    .navbar {
+        min-height: 42px;
+        height: 42px;
+        font-size: 0.75rem;
+    }
+    .login-dropdown, .login-dropdown-btn, .login-dropdown-menu .btn {
+        height: 42px !important;
+        font-size: 0.81rem !important;
+        padding-left: 1.1rem !important;
+        padding-right: 1.1rem !important;
+    }
+    .login-dropdown-menu {
+        padding: 0.25rem 0.15rem 0.25rem 0.15rem;
+        gap: 0.25rem;
+    }
+    .navbar .d-flex.align-items-center.gap-3.ms-auto > * {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+}
+@media (min-width: 992px) {
+    header {
+        margin-top: 5vh;
+    }
+    header .container-fluid.d-none.d-lg-flex > * {
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+@media (min-width: 992px) {
+    header {
+        margin-top: 2vh;
+    }
+}
+@media (min-width: 992px) {
+    header .container-fluid.d-none.d-lg-flex > * {
+        padding-top: 1%;
+        padding-bottom: 1%;
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+}
+@media (min-width: 992px) {
+    header .container-fluid.d-none.d-lg-flex {
+        align-items: center !important;
+        display: flex !important;
+    }
+    header .container-fluid.d-none.d-lg-flex > * {
+        align-self: center !important;
+    }
+}
+@media (min-width: 992px) {
+    .login-dropdown-menu .btn {
+        border-radius: 2rem !important;
+        background: #0d6efd;
+        color: #fff;
+        font-weight: 500;
+        border: none;
+        box-shadow: 0 2px 8px 0 rgba(60,60,120,0.08);
+        width: 100% !important;
+        min-width: 100% !important;
+        padding-left: 1.1rem !important;
+        padding-right: 1.1rem !important;
+        font-size: 0.81rem !important;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 42px;
+        transition: background 0.2s, color 0.2s;
+    }
+    .login-dropdown-menu .btn:hover {
+        background: #1563d7;
+        color: #fff;
+    }
+}
+@media (min-width: 992px) {
+    /* El padding/margen externo solo lo aplica el contenedor del navbar */
+    .navbar, .navbar * {
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+    }
+    .navbar .row,
+    .navbar .col,
+    .navbar .col-auto {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    /* Los botones hijos del dropdown usan exactamente el mismo padding que los del navbar */
+    .login-dropdown-btn,
+    .register-dropdown-btn,
+    #registerDropdown {
+        padding-left: 1.1rem !important;
+        padding-right: 1.1rem !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        height: 48px !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 0.81rem !important;
+        font-weight: 500 !important;
+        border-radius: 2rem !important;
+    }
+    /* El dropdown y sus items no tienen padding/margen extra */
+    .login-dropdown-menu,
+    .login-dropdown-menu li {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    /* El dropdown ocupa el mismo ancho que el trigger */
+    .login-dropdown {
+        width: 220px;
+        min-width: 220px;
+        max-width: 220px;
+    }
+}
+.login-dropdown-btn {
+    /* ...otros estilos... */
+    margin-bottom: 0.5rem;
+    justify-content: center;
+}
+
+/* Mostrar el botón de registro al hacer hover sobre el contenedor o el botón de login */
+@media (min-width: 992px) {
+    .login-dropdown-btn {
+        margin-bottom: 0.5rem !important;
+    }
+}
+@media (min-width: 992px) {
+    .login-dropdown-btn {
+        justify-content: center !important;
+    }
 }
