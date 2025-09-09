@@ -1,0 +1,20 @@
+{% extends 'frontend/base.html' %}
+{% block content %}
+<h2>Herramienta de detección de protocolo y secciones</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Procesar PDF</button>
+</form>
+<p class="text-muted">Solo se procesará el texto impreso del PDF, no manuscritos ni lápiz azul.</p>
+{% if json_result %}
+        <div class="card mt-4" style="max-width:700px;">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Resultado JSON</h5>
+            </div>
+            <div class="card-body" style="max-height:400px; overflow:auto; background:#f8f8f8;">
+                <pre style="white-space:pre-wrap; word-break:break-all;">{{ json_result }}</pre>
+            </div>
+        </div>
+{% endif %}
+{% endblock %}
