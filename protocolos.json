@@ -1,0 +1,48 @@
+{
+  "protocolos": [
+    {
+      "tipo_protocolo": "Apriete de pernos de estructuras (Conexión y anclaje)",
+      "estructura": [
+        {
+          "seccion": "Encabezado",
+          "campos": [
+            {"nombre": "Documento", "tipo": "texto", "ejemplo": "protocolo"},
+            {"nombre": "Categoría", "tipo": "texto", "ejemplo": "Apriete de pernos de estructuras (Conexión y anclaje)"},
+            {"nombre": "N° Obra", "tipo": "numérico", "ejemplo": 24424},
+            {"nombre": "Nombre obra", "tipo": "texto", "ejemplo": "C-101 Obras civiles, montaje y puesta en marcha infraestructura mb s04 GOMS"}
+          ]
+        },
+        {
+          "seccion": "Trazabilidad de la tarea",
+          "campos": [
+            {"nombre": "Área", "tipo": "numérico", "ejemplo": 223420},
+            {"nombre": "Plano/Rev", "tipo": "texto", "ejemplo": "4400257860-12-223420-301ES-00001/Rev.0"},
+            {"nombre": "Subsist/Facility", "tipo": "texto", "ejemplo": "223420F-03-04"},
+            {"nombre": "Estructura", "tipo": "texto", "ejemplo": "PLACAS DE DESGASTE (ACERO A36) DE 2DA Y 3RA ETAPA."},
+            {"nombre": "Sector/Elemento", "tipo": "texto", "ejemplo": "PVAC-PD-S04-04 (PVAC-04)"}
+          ]
+        },
+        {
+          "seccion": "Aseguramiento de Calidad (QA)",
+          "campos": [
+            {"nombre": "Tipo de pernos", "tipo": "seleccion_unica", "opciones": ["Hexagonal", "Corta espiga (TC)", "Con golilla DTI", "Otro"]},
+            {"nombre": "Calidad/Grado pernos", "tipo": "seleccion_unica", "opciones": ["A325", "A490", "Otro"]},
+            {"nombre": "Acero pernos", "tipo": "seleccion_unica", "opciones": ["Carbono", "Galvanizado", "Otro"]}
+          ]
+        },
+        {
+          "seccion": "Ejecución",
+          "campos": []
+        },
+        {
+          "seccion": "Control de Calidad (QC)",
+          "campos": []
+        },
+        {
+          "seccion": "Sector de firmas",
+          "campos": []
+        }
+      ]
+    }
+  ]
+}
