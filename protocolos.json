@@ -24,24 +24,112 @@
         },
         {
           "seccion": "Aseguramiento de Calidad (QA)",
-          "campos": [
-            {"nombre": "Tipo de pernos", "tipo": "seleccion_unica", "opciones": ["Hexagonal", "Corta espiga (TC)", "Con golilla DTI", "Otro"]},
-            {"nombre": "Calidad/Grado pernos", "tipo": "seleccion_unica", "opciones": ["A325", "A490", "Otro"]},
-            {"nombre": "Acero pernos", "tipo": "seleccion_unica", "opciones": ["Carbono", "Galvanizado", "Otro"]}
+          "subsecciones": [
+            {
+              "subtitulo": "1.1 DATOS DE PERNOS",
+              "campos": [
+                {"nombre": "Tipo de pernos", "tipo": "seleccion_unica", "opciones": ["Hexagonal", "Corta espiga (TC)", "Con golilla DTI", "Otro"]},
+                {"nombre": "Calidad/Grado pernos", "tipo": "seleccion_unica", "opciones": ["A325", "A490", "Otro"]},
+                {"nombre": "Acero pernos", "tipo": "seleccion_unica", "opciones": ["Carbono", "Galvanizado", "Otro"]}
+              ]
+            },
+            {
+              "subtitulo": "1.2 VERIFICACIÓN PREVIA ANTES DE APRIETE DE PERNOS DE CONEXIÓN",
+              "campos": [
+                {"nombre": "Montaje de estructura liberada por topografía (ej. verticalidad columnas)", "tipo": "seleccion_unica", "opciones": ["Sí", "No", "No aplica"]}
+              ]
+            }
           ]
         },
         {
           "seccion": "Ejecución",
-          "campos": []
+          "subsecciones": [
+            {
+              "subtitulo": "1.3 DATOS DE APRIETE DE PERNOS DE CONEXIÓN EJECUTADO",
+              "campos": [
+                {
+                  "nombre": "Ejes",
+                  "tipo": "grupo",
+                  "subcampos": [
+                    {"nombre": "Eje (cara)", "tipo": "texto"},
+                    {"nombre": "Desde", "tipo": "texto"},
+                    {"nombre": "Hasta", "tipo": "texto"}
+                  ]
+                },
+                {
+                  "nombre": "Elevación",
+                  "tipo": "grupo",
+                  "subcampos": [
+                    {"nombre": "Desde", "tipo": "texto"},
+                    {"nombre": "Hasta", "tipo": "texto"}
+                  ]
+                },
+                {
+                  "nombre": "Diámetro pernos",
+                  "tipo": "numérico_con_unidad",
+                  "unidades": ["mm", "cm", "m"]
+                },
+                {"nombre": "Apriete aplicado (valor: tensión/torque/TC/DTI)", "tipo": "texto"}
+              ]
+            }
+          ]
         },
         {
           "seccion": "Control de Calidad (QC)",
-          "campos": []
+          "subsecciones": [
+            {
+              "subtitulo": "2.1 DATOS DE CONTROL DE CALIDAD",
+              "campos": [
+                {"nombre": "Tipo acero", "tipo": "seleccion_unica", "opciones": ["Carbono", "Galvanizado", "Otro"]},
+                {"nombre": "Observaciones", "tipo": "texto"},
+                {"nombre": "Inspector", "tipo": "texto"},
+                {
+                  "nombre": "Diámetro pernos",
+                  "tipo": "numérico_con_unidad",
+                  "unidades": ["mm", "cm", "dm"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "seccion": "Observaciones",
+          "campos": [
+            {"nombre": "Observaciones", "tipo": "texto"}
+          ]
         },
         {
           "seccion": "Sector de firmas",
-          "campos": []
+          "cargos": [
+            { "id": "responsable_trabajo", "nombre": "Responsable de trabajo entregado (aprueba)" },
+            { "id": "revisa_pie", "nombre": "Revisa (si así lo señala PIE)" },
+            { "id": "revisa_contrato", "nombre": "Revisa (si así lo señala contrato o PIE)" },
+            { "id": "otra_firma", "nombre": "Otra firma (en caso de requerirse)" }
+          ],
+          "subs": [
+            { "id": "supervisor", "nombre": "Supervisor" },
+            { "id": "encargado_calidad", "nombre": "Encargado calidad o disciplina" },
+            { "id": "cliente", "nombre": "Cliente" }
+          ],
+          "firmas": [
+            { "cargo_id": "responsable_trabajo", "sub_id": "supervisor", "nombre": "", "firma": "", "fecha": "" },
+            { "cargo_id": "revisa_pie", "sub_id": "encargado_calidad", "nombre": "", "firma": "", "fecha": "" },
+            { "cargo_id": "revisa_contrato", "sub_id": "cliente", "nombre": "", "firma": "", "fecha": "" },
+            { "cargo_id": "otra_firma", "sub_id": "", "nombre": "", "firma": "", "fecha": "" }
+          ],
+          "permitir_firmas_adicionales": true
         }
+      ]
+    },
+    {
+      "tipo_protocolo": "Plantilla vacía",
+      "estructura": [
+        { "seccion": "Encabezado", "campos": [] },
+        { "seccion": "Trazabilidad de la tarea", "campos": [] },
+        { "seccion": "Aseguramiento de Calidad (QA)", "subsecciones": [] },
+        { "seccion": "Ejecución", "campos": [] },
+        { "seccion": "Control de Calidad (QC)", "campos": [] },
+        { "seccion": "Sector de firmas", "campos": [] }
       ]
     }
   ]
