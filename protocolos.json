@@ -1,4 +1,11 @@
 {
+  "catalogos": {
+    "tipos_pernos": ["Hexagonal", "Corta espiga (TC)", "Con golilla DTI", "Otro"],
+    "grados_pernos": ["A325", "A490", "Otro"],
+    "aceros": ["Carbono", "Galvanizado", "Otro"],
+    "unidades_diametro": ["mm", "cm", "dm", "m"],
+    "opciones_si_no": ["Sí", "No", "No aplica"]
+  },
   "protocolos": [
     {
       "tipo_protocolo": "Apriete de pernos de estructuras (Conexión y anclaje)",
@@ -28,15 +35,15 @@
             {
               "subtitulo": "1.1 DATOS DE PERNOS",
               "campos": [
-                {"nombre": "Tipo de pernos", "tipo": "seleccion_unica", "opciones": ["Hexagonal", "Corta espiga (TC)", "Con golilla DTI", "Otro"]},
-                {"nombre": "Calidad/Grado pernos", "tipo": "seleccion_unica", "opciones": ["A325", "A490", "Otro"]},
-                {"nombre": "Acero pernos", "tipo": "seleccion_unica", "opciones": ["Carbono", "Galvanizado", "Otro"]}
+                {"nombre": "Tipo de pernos", "tipo": "seleccion_unica", "catalogo": "tipos_pernos"},
+                {"nombre": "Calidad/Grado pernos", "tipo": "seleccion_unica", "catalogo": "grados_pernos"},
+                {"nombre": "Acero pernos", "tipo": "seleccion_unica", "catalogo": "aceros"}
               ]
             },
             {
               "subtitulo": "1.2 VERIFICACIÓN PREVIA ANTES DE APRIETE DE PERNOS DE CONEXIÓN",
               "campos": [
-                {"nombre": "Montaje de estructura liberada por topografía (ej. verticalidad columnas)", "tipo": "seleccion_unica", "opciones": ["Sí", "No", "No aplica"]}
+                {"nombre": "Montaje de estructura liberada por topografía (ej. verticalidad columnas)", "tipo": "seleccion_unica", "catalogo": "opciones_si_no"}
               ]
             }
           ]
@@ -67,7 +74,7 @@
                 {
                   "nombre": "Diámetro pernos",
                   "tipo": "numérico_con_unidad",
-                  "unidades": ["mm", "cm", "m"]
+                  "catalogo_unidad": "unidades_diametro"
                 },
                 {"nombre": "Apriete aplicado (valor: tensión/torque/TC/DTI)", "tipo": "texto"}
               ]
@@ -80,13 +87,13 @@
             {
               "subtitulo": "2.1 DATOS DE CONTROL DE CALIDAD",
               "campos": [
-                {"nombre": "Tipo acero", "tipo": "seleccion_unica", "opciones": ["Carbono", "Galvanizado", "Otro"]},
+                {"nombre": "Tipo acero", "tipo": "seleccion_unica", "catalogo": "aceros"},
                 {"nombre": "Observaciones", "tipo": "texto"},
                 {"nombre": "Inspector", "tipo": "texto"},
                 {
                   "nombre": "Diámetro pernos",
                   "tipo": "numérico_con_unidad",
-                  "unidades": ["mm", "cm", "dm"]
+                  "catalogo_unidad": "unidades_diametro"
                 }
               ]
             }
@@ -118,6 +125,14 @@
             { "cargo_id": "otra_firma", "sub_id": "", "nombre": "", "firma": "", "fecha": "" }
           ],
           "permitir_firmas_adicionales": true
+        },
+        {
+          "seccion": "Evidencia",
+          "archivos": [
+            { "tipo": "plano", "descripcion": "Plano de referencia", "archivo": "" },
+            { "tipo": "foto", "descripcion": "Fotografía de la ejecución", "archivo": "" }
+          ],
+          "permitir_archivos_adicionales": true
         }
       ]
     },
