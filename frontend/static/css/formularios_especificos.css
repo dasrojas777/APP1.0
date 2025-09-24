@@ -1,0 +1,89 @@
+/* Input y select de numérico_con_unidad alineados */
+.grupo-num-unidad {
+    gap: 0.25rem;
+    margin-bottom: 0.2rem;
+    align-items: flex-end;
+}
+.grupo-num-unidad input.form-control {
+    min-width: 80px;
+    max-width: 120px;
+    width: 100%;
+    display: inline-block;
+}
+.grupo-num-unidad select.form-select {
+    min-width: 60px;
+    max-width: 90px;
+    width: auto;
+    display: inline-block;
+    margin-left: auto;
+}
+.grupo-desde-hasta {
+    margin-bottom: 1.2rem;
+}
+.grupo-desde-hasta .d-flex {
+    gap: 1.2rem;
+}
+.grupo-desde-hasta .flex-fill {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.grupo-desde-hasta .form-label {
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+}
+.grupo-desde-hasta input.form-control {
+    min-width: 90px;
+    max-width: 140px;
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 0.35rem 0.5rem;
+}
+/* Limitar ancho máximo del select y del card */
+.card.mx-auto {
+    max-width: 400px;
+    width: 100%;
+}
+
+#select-protocolo.form-select {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 500px) {
+    .card.mx-auto {
+        max-width: 98vw;
+    }
+    #select-protocolo.form-select {
+        font-size: 1rem;
+        padding-left: 0.5rem;
+        padding-right: 2rem;
+    }
+}
+/* Mostrar los campos 'Desde' y 'Hasta' en línea */
+.grupo-desde-hasta {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+}
+.grupo-desde-hasta > div {
+    flex: 1 1 0;
+    margin-bottom: 0;
+}
+/* Ejemplo de regla específica para el formulario de Apriete de pernos de estructuras (Conexión y anclaje) */
+.formulario-apriete-de-pernos-de-estructuras-conexion-y-anclaje {
+    background: #f7faff;
+    border: 2px solid #1976d2;
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+/* Ejemplo para Plantilla vacía */
+.formulario-plantilla-vacia {
+    background: #fffbe7;
+    border: 2px dashed #e6b800;
+    border-radius: 1rem;
+    padding: 1.5rem;
+}

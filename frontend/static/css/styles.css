@@ -1,20 +1,70 @@
-/* Dropdown personalizado para login/registro */
-.dropdown-menu-custom {
-    display: none;
-    flex-direction: column;
-    gap: 0;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    animation: fadeInDropdown 0.25s;
+.dropdown-menu[aria-labelledby="dropdownFormularios"] .dropdown-item {
+    font-size: 1.08rem;
+    font-weight: 500;
+    color: #1e293b;
+    border-radius: 0.4rem;
+    transition: background 0.15s, color 0.15s;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    word-break: break-word;
+    display: block;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    text-align: left;
+    box-sizing: border-box;
 }
-.login-dropdown:hover .dropdown-menu-custom,
-.login-dropdown:focus-within .dropdown-menu-custom,
-#loginDropdown:focus + .dropdown-menu-custom {
-    display: flex !important;
+@media (max-width: 575.98px) {
+    .dropdown-menu[aria-labelledby="dropdownFormularios"] .dropdown-item {
+        font-size: 1rem;
+        max-width: 92vw;
+    }
 }
-@keyframes fadeInDropdown {
-    from { opacity: 0; transform: translateY(-8px); }
+/* Dropdown de formularios: igual ancho que el botón y centrado */
+.dropdown-menu[aria-labelledby="dropdownFormularios"] {
+    min-width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: left;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    margin-top: 0.2rem;
+    padding: 0.25rem 0;
+}
+.dropdown-menu[aria-labelledby="dropdownFormularios"] .dropdown-item {
+    font-size: 1.08rem;
+    font-weight: 500;
+    color: #1e293b;
+    border-radius: 0.4rem;
+    transition: background 0.15s, color 0.15s;
+}
+.dropdown-menu[aria-labelledby="dropdownFormularios"] .dropdown-item {
+    font-size: 1.08rem;
+    font-weight: 400;
+    color: #212529;
+    border-radius: 0;
+    transition: background 0.15s, color 0.15s;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    word-break: break-word;
+    display: block;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    box-sizing: border-box;
+}
+.dropdown-menu[aria-labelledby="dropdownFormularios"] .dropdown-item.active,
+.dropdown-menu[aria-labelledby="dropdownFormularios"] .dropdown-item:active {
+    background-color: #0d6efd;
+    color: #fff;
+}
+.dropdown-menu[aria-labelledby="dropdownFormularios"] .dropdown-item:hover,
+.dropdown-menu[aria-labelledby="dropdownFormularios"] .dropdown-item:focus {
+    background: #e9ecef;
+    color: #0d6efd;
+}
     to { opacity: 1; transform: translateY(0); }
 }
 /* Centrar verticalmente los elementos de la navbar de escritorio */

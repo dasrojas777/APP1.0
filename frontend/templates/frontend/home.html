@@ -3,14 +3,20 @@
 {% block content %}
 <div class="container py-4 d-flex flex-column align-items-center">
 	<h2 class="text-center mb-3">Bienvenido al sistema</h2>
-	<button id="btn-generar-form" class="btn btn-primary mb-4 mx-auto" type="button">Generar formulario</button>
 	<div class="card shadow mx-auto" style="width: 100%; max-width: 400px;">
 		<div class="card-body">
+			<div class="mb-3">
+				<select id="select-protocolo" class="form-select w-100">
+					<option value="" selected disabled>Selecciona un protocolo</option>
+				</select>
+			</div>
+			<button id="btn-generar-form" class="btn btn-success w-100 mb-3" type="button" disabled>Generar formulario</button>
 			<!-- Aquí se desplegará el formulario dinámico -->
 			<div id="formulario-dinamico-placeholder"></div>
 		</div>
 	</div>
 </div>
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/formularios_especificos.css' %}">
 <script src="{% static 'js/formulario_dinamico.js' %}"></script>
 {% endblock %}
