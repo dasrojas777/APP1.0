@@ -1,0 +1,103 @@
+{% extends 'frontend/base.html' %}
+{% block title %}Nuevo formulario dinámico{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <h2>Crear nuevo formulario dinámico</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="protocolo" class="form-label">Selecciona un protocolo:</label>
+            <select class="form-select" id="protocolo" name="protocolo" required>
+                <option value="">-- Selecciona un protocolo --</option>
+                {% for nombre, archivo in protocolos %}
+                    <option value="{{ archivo }}" {% if archivo == protocolo_seleccionado %}selected{% endif %}>{{ nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" name="generar_formulario" value="1" class="btn btn-primary mb-3">Generar formulario</button>
+        {% if formulario %}
+            <hr>
+            <h4>Formulario generado:</h4>
+            {% for seccion in secciones %}
+                <div class="mb-4">
+                    <h5>{{ seccion.titulo }}</h5>
+                    {% if seccion.titulo == 'Encabezado' %}
+                        {% for campo in seccion.campos %}
+                            {% if campo.label and campo.tipo and campo.ejemplo %}
+                                <div class="mb-2">
+                                    <label class="form-label" for="{{ campo.label }}">{{ campo.label }}</label>
+                                    <input 
+                                        id="{{ campo.label }}"
+                                        type="{{ campo.tipo }}"
+                                        class="form-control"
+                                        name="{{ campo.label|slugify }}"
+                                        placeholder="{{ campo.ejemplo }}">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for campo in seccion.campos %}
+                            <div class="mb-2">
+                                {% if campo.render %}
+                                    <label class="form-label" for="{{ campo.render.id_for_label }}">{{ campo.label }}</label>
+                                    {{ campo.render }}
+                                {% else %}
+                                    <label class="form-label">{{ campo.label }}</label>
+                                    <input 
+                                        type="{{ campo.tipo|default:'text' }}" 
+                                        class="form-control" 
+                                        name="{{ campo.label|slugify }}"
+                                        {% if campo.ejemplo %}placeholder="Ejemplo: {{ campo.ejemplo }}"{% endif %}>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% for sub in seccion.subsecciones %}
+                        <div class="ms-3 mb-2">
+                            {% if sub.subtitulo %}
+                                <div class="fw-bold text-primary">{{ sub.subtitulo }}</div>
+                            {% endif %}
+                            {% for campo in sub.campos %}
+                                <div class="mb-2">
+                                    {% if campo.render %}
+                                        <label class="form-label" for="{{ campo.render.id_for_label }}">{{ campo.label }}</label>
+                                        {% if campo.placeholder %}
+                                            {% with id=campo.render.id_for_label %}
+                                                <script>
+                                                    (function() {
+                                                        var input = document.getElementById("{{ id }}");
+                                                        if(input) { input.placeholder = "{{ campo.placeholder }}"; }
+                                                    })();
+                                                </script>
+                                            {% endwith %}
+                                        {% endif %}
+                                        {{ campo.render }}
+                                    {% else %}
+                                        <label class="form-label">{{ campo.label }}</label>
+                                        <input 
+                                            type="{{ campo.tipo|default:'text' }}" 
+                                            class="form-control" 
+                                            name="{{ campo.label|slugify }}"
+                                            {% if campo.ejemplo %}placeholder="Ejemplo: {{ campo.ejemplo }}"{% endif %}>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-success">Guardar formulario</button>
+        {% endif %}
+    </form>
+    {% if resultado %}
+        <hr>
+        <h4>Datos enviados:</h4>
+        <pre>{{ resultado|safe }}</pre>
+    {% endif %}
+    {% if resultado %}
+        <hr>
+        <h4>Datos enviados:</h4>
+        <pre>{{ resultado|safe }}</pre>
+    {% endif %}
+</div>
+{% endblock %}

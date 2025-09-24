@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "encabezado": "Encabezado",
+    "trazabilidad": "Trazabilidad de la tarea",
+    "qa": "Aseguramiento de Calidad (QA)",
+    "ejecucion": "Ejecución",
+    "qc": "Control de Calidad (QC)",
+    "observaciones": "Observaciones",
+    "evidencia": "Evidencia",
+    "firmas": "Sector de firmas"
+  },
+  "catalogs": {
+    "tipos_pernos": ["Hexagonal", "Corta espiga (TC)", "Con golilla DTI", "Otro"],
+    "grados_pernos": ["A325", "A490", "Otro"],
+    "aceros": ["Carbono", "Galvanizado", "Otro"],
+    "unidades_diametro": ["mm", "cm", "dm", "m"],
+    "opciones_si_no": ["Sí", "No", "No aplica"]
+  },
+  "fields": [
+    {"id": "documento", "type": "text", "label": "Documento", "placeholder": "Ejemplo: protocolo", "section": "encabezado"},
+    {"id": "categoria", "type": "text", "label": "Categoría", "placeholder": "Ejemplo: Apriete de pernos de estructuras (Conexión y anclaje)", "section": "encabezado"},
+    {"id": "n_obra", "type": "number", "label": "N° Obra", "placeholder": "Ejemplo: 24424", "section": "encabezado"},
+    {"id": "nombre_obra", "type": "text", "label": "Nombre obra", "placeholder": "Ejemplo: C-101 Obras civiles, montaje y puesta en marcha infraestructura mb s04 GOMS", "section": "encabezado"},
+    {"id": "area", "type": "number", "label": "Área", "placeholder": "Ejemplo: 223420", "section": "trazabilidad"},
+    {"id": "plano_rev", "type": "text", "label": "Plano/Rev", "placeholder": "Ejemplo: 4400257860-12-223420-301ES-00001/Rev.0", "section": "trazabilidad"},
+    {"id": "subsist_facility", "type": "text", "label": "Subsist/Facility", "placeholder": "Ejemplo: 223420F-03-04", "section": "trazabilidad"},
+    {"id": "estructura", "type": "text", "label": "Estructura", "placeholder": "Ejemplo: PLACAS DE DESGASTE (ACERO A36) DE 2DA Y 3RA ETAPA.", "section": "trazabilidad"},
+    {"id": "sector_elemento", "type": "text", "label": "Sector/Elemento", "placeholder": "Ejemplo: PVAC-PD-S04-04 (PVAC-04)", "section": "trazabilidad"},
+    {"id": "tipo_pernos", "type": "select", "label": "Tipo de pernos", "options_catalog": "tipos_pernos", "section": "qa", "subsection": "1.1 DATOS DE PERNOS"},
+    {"id": "calidad_grado_pernos", "type": "select", "label": "Calidad/Grado pernos", "options_catalog": "grados_pernos", "section": "qa", "subsection": "1.1 DATOS DE PERNOS"},
+    {"id": "acero_pernos", "type": "select", "label": "Acero pernos", "options_catalog": "aceros", "section": "qa", "subsection": "1.1 DATOS DE PERNOS"},
+    {"id": "montaje_estructura_liberada", "type": "select", "label": "Montaje de estructura liberada por topografía (ej. verticalidad columnas)", "options_catalog": "opciones_si_no", "section": "qa", "subsection": "1.2 VERIFICACIÓN PREVIA ANTES DE APRIETE DE PERNOS DE CONEXIÓN"},
+    {"id": "ejes_eje_cara", "type": "text", "label": "Eje (cara)", "group": "Ejes", "section": "ejecucion", "subsection": "1.3 DATOS DE APRIETE DE PERNOS DE CONEXIÓN EJECUTADO"},
+    {"id": "ejes_desde", "type": "text", "label": "Desde", "group": "Ejes", "section": "ejecucion", "subsection": "1.3 DATOS DE APRIETE DE PERNOS DE CONEXIÓN EJECUTADO"},
+    {"id": "ejes_hasta", "type": "text", "label": "Hasta", "group": "Ejes", "section": "ejecucion", "subsection": "1.3 DATOS DE APRIETE DE PERNOS DE CONEXIÓN EJECUTADO"},
+    {"id": "elevacion_desde", "type": "text", "label": "Desde", "group": "Elevación", "section": "ejecucion", "subsection": "1.3 DATOS DE APRIETE DE PERNOS DE CONEXIÓN EJECUTADO"},
+    {"id": "elevacion_hasta", "type": "text", "label": "Hasta", "group": "Elevación", "section": "ejecucion", "subsection": "1.3 DATOS DE APRIETE DE PERNOS DE CONEXIÓN EJECUTADO"},
+    {"id": "diametro_pernos", "type": "number", "label": "Diámetro pernos", "options_catalog": "unidades_diametro", "section": "ejecucion", "subsection": "1.3 DATOS DE APRIETE DE PERNOS DE CONEXIÓN EJECUTADO"},
+    {"id": "apriete_aplicado", "type": "text", "label": "Apriete aplicado (valor: tensión/torque/TC/DTI)", "section": "ejecucion", "subsection": "1.3 DATOS DE APRIETE DE PERNOS DE CONEXIÓN EJECUTADO"},
+    {"id": "tipo_acero", "type": "select", "label": "Tipo acero", "options_catalog": "aceros", "section": "qc", "subsection": "2.1 DATOS DE CONTROL DE CALIDAD"},
+    {"id": "observaciones_qc", "type": "text", "label": "Observaciones", "section": "qc", "subsection": "2.1 DATOS DE CONTROL DE CALIDAD"},
+    {"id": "inspector", "type": "text", "label": "Inspector", "section": "qc", "subsection": "2.1 DATOS DE CONTROL DE CALIDAD"},
+    {"id": "diametro_pernos_qc", "type": "number", "label": "Diámetro pernos", "options_catalog": "unidades_diametro", "section": "qc", "subsection": "2.1 DATOS DE CONTROL DE CALIDAD"},
+    {"id": "observaciones", "type": "text", "label": "Observaciones", "section": "observaciones"},
+    {"id": "plano_referencia", "type": "file", "label": "Plano de referencia", "section": "evidencia"},
+    {"id": "foto_ejecucion", "type": "file", "label": "Fotografía de la ejecución", "section": "evidencia"},
+    {"id": "firma_responsable_trabajo_supervisor", "type": "signature", "label": "Responsable de trabajo entregado (aprueba) - Supervisor", "section": "firmas"},
+    {"id": "firma_revisa_pie_encargado_calidad", "type": "signature", "label": "Revisa (si así lo señala PIE) - Encargado calidad o disciplina", "section": "firmas"},
+    {"id": "firma_revisa_contrato_cliente", "type": "signature", "label": "Revisa (si así lo señala contrato o PIE) - Cliente", "section": "firmas"},
+    {"id": "firma_otra_firma", "type": "signature", "label": "Otra firma (en caso de requerirse)", "section": "firmas"}
+  ]
+}
